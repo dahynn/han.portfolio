@@ -2083,12 +2083,13 @@ a { color:inherit; text-decoration:none; }
 /* Preserve the CJ cover's staggered three-line composition in Hansol colors. */
 @font-face { font-family:'Hansol Website Noto Sans KR'; src:url('/assets/fonts/NotoSansKR-Regular.woff2') format('woff2'); font-style:normal; font-weight:400; font-display:swap; }
 @font-face { font-family:'Hansol Website Noto Sans KR'; src:url('/assets/fonts/NotoSansKR-Black.woff2') format('woff2'); font-style:normal; font-weight:900; font-display:swap; }
+@font-face { font-family:'SUIT Display'; src:url('/assets/fonts/SUIT-ExtraBold.woff2') format('woff2'); font-style:normal; font-weight:800; font-display:swap; }
 #introduction .profile-details>h1.cover-fullstack-title {
   display:block;
   margin:0;
-  font-size:clamp(1.65rem,2.85vw,3.05rem);
-  font-family:'Hansol Website Noto Sans KR',Pretendard,sans-serif;
-  font-weight:900;
+  font-size:clamp(1.8rem,2.85vw,3.05rem);
+  font-family:'SUIT Display','Pretendard Variable',Pretendard,sans-serif;
+  font-weight:800;
   line-height:1.32;
   letter-spacing:-.055em;
   word-break:keep-all;
@@ -2151,71 +2152,73 @@ a { color:inherit; text-decoration:none; }
 }
 
 
-/* The selected HMS concept uses a real diagram asset beneath the primary title. */
-#introduction .hms-cover {
-  position:relative;
-  z-index:1;
-  display:grid;
-  grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
+/* Keep the Hansol journey endpoint clear of the timeline and align its contents. */
+.journey-destination {
+  margin-top:1rem;
+  display:flex;
+  flex-wrap:nowrap;
   align-items:center;
-  gap:clamp(1rem,2vw,1.75rem);
-  margin-top:clamp(3rem,7vh,4.5rem);
-  font-family:'Hansol Website Noto Sans KR',Pretendard,sans-serif;
+  gap:1.25rem;
+  padding:0 0 .5rem 3.25rem;
 }
-.hms-figure { min-width:0; margin:0; }
-.hms-diagram-control {
-  display:block;
-  width:100%;
-  padding:0;
-  border:0;
-  background:transparent;
-  cursor:pointer;
-  perspective:900px;
-  border-radius:50%;
+.journey-destination::before {
+  top:-18px;
+  left:0;
+  width:2.4rem;
+  height:2.75rem;
+  border-left:2px solid var(--accent);
+  border-bottom:2px solid var(--accent);
+  border-bottom-left-radius:.8rem;
 }
-.hms-diagram-image { display:block; width:100%; height:auto; transform-origin:center; animation:hms-orbit-turn 80s linear 1.5s infinite; animation-play-state:paused; }
-#introduction.is-active .hms-diagram-image { animation-play-state:running; }
-#introduction .hms-diagram-control:hover .hms-diagram-image,
-#introduction .hms-diagram-control:focus-visible .hms-diagram-image { animation-play-state:paused; }
-#introduction .hms-cover[data-paused="true"] .hms-diagram-image { animation:none; transform:none; }
-.hms-diagram-control:focus-visible,.hms-source:focus-visible { outline:2px solid #66b9e5; outline-offset:4px; }
-.hms-motion-hint { display:flex; align-items:center; justify-content:center; gap:.3rem; min-height:1rem; margin-top:.2rem; color:#7f8b93; font-size:.59rem; font-weight:400; }
-.hms-caption { min-width:0; padding-left:clamp(1rem,2vw,1.65rem); border-left:1px solid #ffffff38; }
-.hms-caption h2 { margin:0; color:#fff; font-size:clamp(1rem,1.75vw,1.3rem); font-weight:900; line-height:1.45; letter-spacing:-.04em; word-break:keep-all; }
-.hms-caption h2>span { color:var(--hansol-blue); }
-.hms-definition { margin:.65rem 0 0; color:#a9b4bc; font-size:.83rem; line-height:1.6; word-break:keep-all; }
-.hms-intent { width:100%; margin:0; padding-top:0; color:#e5e9ed; font-size:clamp(.82rem,1.27vw,1rem); line-height:1.75; letter-spacing:-.025em; word-break:keep-all; }
-.hms-source { display:inline-flex; align-items:center; gap:.3rem; margin-top:1rem; color:#6c8695; font:400 .55rem 'Helvetica Neue',Helvetica,Arial,sans-serif; }
-.hms-source:hover { color:#86c5e5; text-decoration:underline; }
-@keyframes hms-orbit-turn { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
-#introduction .profile-details:has(.hms-cover)::after { display:none; }
-#introduction .profile-details:has(.hms-cover)::before { opacity:.35; }
-@media(min-width:761px) {
-  #introduction .profile-details:has(.hms-cover) { justify-content:center; padding-top:5.5rem; padding-bottom:4rem; }
+.journey-destination img {
+  flex:0 0 auto;
+  width:128px;
+  max-width:38%;
+  height:auto;
+  margin:0;
 }
-@media(min-width:761px) and (max-width:1000px) {
-  #introduction .hms-cover { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:.75rem; margin-top:3rem; }
-  .hms-caption { padding-left:.85rem; }
-  .hms-caption h2 { font-size:.9rem; }
-  .hms-definition { font-size:.7rem; }
-  .hms-intent { font-size:.75rem; }
-  .hms-motion-hint { font-size:.5rem; }
+.journey-destination p {
+  min-width:0;
+  margin:0;
+  font-size:clamp(.75rem,.95vw,.875rem);
+  line-height:1.65;
 }
-@media(max-width:760px) {
-  #introduction .hms-cover { grid-template-columns:1fr; gap:1.5rem; margin-top:2.5rem; }
-  .hms-figure { width:min(100%,245px); justify-self:center; }
-  .hms-caption { padding-left:1.15rem; margin-inline:.25rem; }
-  .hms-caption h2 { font-size:1.1rem; }
-  .hms-definition { font-size:.8rem; }
-  .hms-intent { font-size:.9rem; }
-  .hms-source { font-size:.63rem; }
-}
-@media(prefers-reduced-motion:reduce) {
-  #introduction .hms-diagram-image { animation:none; transform:none; }
-  .hms-motion-hint { display:none; }
+@media (max-width:760px) {
+  .journey-destination { padding-left:58px; gap:.75rem; }
+  .journey-destination::before { top:-18px; left:10px; width:34px; height:2.6rem; border-bottom-left-radius:.8rem; }
+  .journey-destination img { width:108px; }
 }
 
-.hms-rule { width:2.25rem; margin:1.1rem 0; border:0; border-top:3px solid var(--hansol-green); }
+/* Selected HMS reference: paired principles with a personal development statement. */
+#introduction .hms-principles { position:relative; z-index:1; width:93%; margin-inline:auto; margin-top:clamp(3rem,8vh,5.5rem); font-family:'Hansol Website Noto Sans KR',Pretendard,sans-serif; }
+.hms-principles-heading { position:relative; text-align:center; }
+.hms-principles-heading h2 { margin:0; color:#fff; font-size:clamp(.95rem,1.35vw,1.2rem); font-weight:800; letter-spacing:-.04em; }
+.hms-principles-heading h2::after { display:block; width:7rem; height:2px; margin:.8rem auto .65rem; background:linear-gradient(90deg,var(--hansol-blue) 50%,var(--hansol-green) 50%); content:""; }
+.hms-principles-heading>a { color:#929ba5; font-size:clamp(.6rem,.85vw,.78rem); letter-spacing:.02em; }
+.hms-autoplay { position:absolute; top:0; right:0; display:grid; place-items:center; width:24px; height:24px; padding:0; border:0; background:transparent; color:#7c8792; cursor:pointer; }
+.hms-principles-groups { position:relative; display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); margin-top:2.5rem; gap:1.25rem; }
+.hms-principles-groups::before { position:absolute; top:-1.15rem; left:30%; right:18%; height:.9rem; border:1px solid #737e89; border-bottom:0; border-radius:.25rem .25rem 0 0; content:""; }
+.hms-principles-heading::after { position:absolute; bottom:-1.35rem; left:50%; height:1.15rem; border-left:1px solid #737e89; content:""; }
+.hms-principles-group { min-width:0; margin:0; padding:0; border:0; }
+.hms-principles-group legend { width:100%; margin:0 0 .75rem; padding:0; text-align:center; color:#a2aab4; font-size:clamp(.68rem,.9vw,.85rem); font-weight:650; }
+.hms-organization { padding-left:1.25rem; border-left:1px solid #66717d; }
+.hms-principles-options { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); align-items:center; gap:0; }
+.hms-principles-options button { position:relative; min-width:0; padding:0 0 .45rem; border:0; background:transparent; color:#e2e5e9; text-align:center; font-size:clamp(.6rem,.82vw,.8rem); font-weight:550; line-height:1.5; white-space:nowrap; cursor:pointer; transition:color .35s; }
+.hms-principles-options button+button::before { position:absolute; top:.22em; left:0; width:1px; height:.9em; background:#5d6670; content:""; }
+.hms-principle-label { position:relative; display:inline-block; }
+.hms-principle-label::after { position:absolute; right:0; bottom:-.45rem; left:0; height:2px; background:currentColor; opacity:0; transform:scaleX(.4); transition:opacity .3s,transform .35s; content:""; }
+.hms-business button[aria-pressed="true"] { color:#009be6; font-weight:750; }
+.hms-organization button[aria-pressed="true"] { color:#00c763; font-weight:750; }
+.hms-principles-options button[aria-pressed="true"] .hms-principle-label::after { opacity:1; transform:scaleX(1); }
+.hms-principles button:focus-visible,.hms-principles a:focus-visible { outline:2px solid #66b9e5; outline-offset:4px; }
+.hms-approach { overflow:hidden; min-height:4rem; margin-top:1.25rem; padding-top:1rem; border-top:1px solid #ffffff30; text-align:center; }
+.hms-approach p { margin:0; color:#e2e6ea; font-size:clamp(.7rem,.9vw,.88rem); line-height:1.8; word-break:keep-all; animation:hms-message-enter .7s cubic-bezier(.22,1,.36,1) both; }
+@keyframes hms-message-enter { from { opacity:0; transform:translateY(110%); clip-path:inset(100% 0 0 0); } to { opacity:1; transform:translateY(0); clip-path:inset(0 0 0 0); } }
+#introduction .profile-details:has(.hms-principles)::after { display:none; }
+#introduction .profile-details:has(.hms-principles)::before { display:none; }
+@media(min-width:761px) { #introduction .profile-details:has(.hms-principles) { justify-content:center; padding-top:5.5rem; padding-bottom:4rem; } }
+@media(min-width:761px) and (max-width:1000px) { .hms-principles-groups { gap:.8rem; } .hms-organization { padding-left:.8rem; } .hms-principles-options { gap:.25rem; } .hms-principles-options button { font-size:.55rem; } .hms-principles-options button+button::before { left:0; } }
+@media(max-width:760px) { .hms-principles-groups::before { left:50%; right:auto; width:0; border-right:0; border-radius:0; } #introduction .hms-principles { margin-top:3rem; } .hms-principles-groups { grid-template-columns:1fr; gap:1.1rem; margin-top:2.25rem; } .hms-organization { padding-left:0; padding-top:1rem; border-left:0; border-top:1px solid #ffffff24; } .hms-principles-group legend { font-size:.75rem; } .hms-principles-options button { font-size:.65rem; } .hms-approach { min-height:5rem; } .hms-approach p { font-size:.8rem; } }
+@media(prefers-reduced-motion:reduce) { .hms-approach p { animation:none; } .hms-principles-options button,.hms-principle-label::after { transition:none; } }
 
-.hms-motion-touch { display:none; }
-@media(max-width:760px),(hover:none) { .hms-motion-desktop { display:none; } .hms-motion-touch { display:inline; } }
+.hms-business .hms-principles-options button:last-child { display:flex; align-items:center; justify-content:center; align-self:stretch; }

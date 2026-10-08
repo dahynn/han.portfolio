@@ -1347,17 +1347,17 @@ html { scroll-snap-type: y proximity; }
   justify-self:end;
   min-height:2.4rem;
   padding:.5rem .9rem;
-  border:1px solid #f2dccb;
+  border:1px solid #bfdfef;
   border-radius:999px;
-  background:#fff2e9;
-  color:#b64a0d;
+  background:#edf7fc;
+  color:#006ca6;
   font-size:.78rem;
   font-weight:800;
   line-height:1.2;
 }
 .store-scroll svg { padding:0; color:currentColor; }
 .store-scroll:hover { background:#007fc3; border-color:#007fc3; color:#fff; }
-.store-scroll:focus-visible { outline:2px solid #b64a0d; outline-offset:3px; }
+.store-scroll:focus-visible { outline:2px solid #007fc3; outline-offset:3px; }
 
 @media (max-width:760px) {
   .store-item,.store-item:last-child { grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto; gap:.55rem; padding:.8rem; }

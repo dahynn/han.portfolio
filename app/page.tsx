@@ -123,8 +123,8 @@ export default function Home() {
         <BrandLogo />
         <p className="page-number">02</p>
         <div className="journey-heading">
-          <p className="eyebrow section-kicker">Development journey</p>
-          <h2 id="journey-title">개발자로서의 여정</h2>
+          <p className="eyebrow section-kicker">Journey to full-stack development</p>
+          <h2 id="journey-title">풀스택 개발을 향한 여정</h2>
         </div>
         <div className="journey-map">
           <ol className="journey-track">
@@ -142,7 +142,7 @@ export default function Home() {
               />
               <p className="journey-date">{activity.date}</p>
               <div className="journey-copy">
-                <strong className={['삼성청년SW·AI 아카데미 14기', '한화금융캠퍼스 15기'].includes(activity.title) ? 'role-journey-highlight' : undefined}>{activity.title}</strong>
+                <strong className={['멋쟁이사자처럼 10기', 'GDSC(Google Developer Student Clubs) 1기', '삼성청년SW·AI 아카데미 14기'].includes(activity.title) ? 'role-journey-highlight' : undefined}>{activity.title}</strong>
                 {'gpa' in activity && <span className="journey-gpa" aria-label={`학점 ${activity.gpa}`}>GPA {activity.gpa}</span>}
                 <p>{activity.detail}</p>
               </div>
@@ -151,7 +151,7 @@ export default function Home() {
           </ol>
           <div className="journey-destination">
             <img src="/assets/hansol-pns-logo.png" alt="한솔PNS IT" width="976" height="384" loading="lazy" decoding="async" />
-            <p>쌓아온 경험을,<br /><strong>한솔PNS IT에서 이어가겠습니다.</strong></p>
+            <p>쌓아온 경험을,<br /><strong>한솔PNS에서 이어가겠습니다.</strong></p>
           </div>
         </div>
       </section>

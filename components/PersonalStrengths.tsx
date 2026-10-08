@@ -1,47 +1,66 @@
 'use client';
 
-/* oxlint-disable next/no-img-element -- 선택한 HMS 이미지의 투명도와 원본 비율을 정적 Pages에서도 유지합니다. */
+import { useEffect, useRef, useState } from 'react';
+import { Pause, Play } from 'lucide-react';
 
-import { useState } from 'react';
-import { ArrowUpRight, Pause, Play } from 'lucide-react';
+const approaches = [
+  { business: '고객지향', organization: '몰입', message: '고객의 첫 클릭부터 처리 결과까지, 끊기는 지점을 끝까지 확인합니다.' },
+  { business: '새로운 가치', organization: '투명', message: '화면과 서버의 결과를 함께 확인하고, 판단의 근거를 남깁니다.' },
+  { business: '더 나은 방식', organization: '존중', message: '다음 사람이 이해하고 고칠 수 있도록, 더 나은 구조로 풀어냅니다.' },
+  { business: '차별적 경쟁우위', organization: '스피드', message: '작게 구현해 빠르게 확인하고, 개선한 결과를 끝까지 검증합니다.' },
+];
 
 export function PersonalStrengths() {
+  const [selected, setSelected] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotion = () => setReducedMotion(media.matches);
+    updateMotion();
+    media.addEventListener('change', updateMotion);
+    const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { threshold: 0.2 });
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => { media.removeEventListener('change', updateMotion); observer.disconnect(); };
+  }, []);
+
+  useEffect(() => {
+    if (paused || reducedMotion || !visible) return;
+    const timer = window.setInterval(() => setSelected((value) => (value + 1) % approaches.length), 4000);
+    return () => window.clearInterval(timer);
+  }, [paused, reducedMotion, visible, selected]);
+
 
   return (
-    <section className="hms-cover" aria-labelledby="hms-title" data-paused={paused}>
-      <figure className="hms-figure">
-        <button
-          className="hms-diagram-control"
-          type="button"
-          aria-label={paused ? 'HMS 도표 움직임 재생' : 'HMS 도표 움직임 정지'}
-          aria-pressed={paused}
-          aria-describedby="hms-motion-hint"
-          onClick={() => setPaused((value) => !value)}
-        >
-          <img
-            className="hms-diagram-image"
-            src="/assets/hms-orbit.png"
-            width="1254"
-            height="1254"
-            decoding="async"
-            draggable={false}
-            alt="한솔경영체계 HMS. 바깥의 사업원칙: 차별적 경쟁우위, 고객지향, 새로운 가치, 더 나은 방식. 안쪽의 조직원칙: 몰입, 투명, 존중, 스피드."
-          />
-        </button>
-        <figcaption id="hms-motion-hint" className="hms-motion-hint">
-          {paused ? <Play size={10} aria-hidden="true" /> : <Pause size={10} aria-hidden="true" />}
-          {paused ? <span>눌러서 다시 움직이기</span> : <><span className="hms-motion-desktop">마우스를 올리면 잠시 멈춥니다</span><span className="hms-motion-touch">눌러서 움직임 멈추기</span></>}
-        </figcaption>
-      </figure>
-      <div className="hms-caption">
-        <h2 id="hms-title"><span>HMS,</span> 개발의 기준으로</h2>
-        <p className="hms-definition">사업원칙과 조직원칙을<br />함께 실천하는 태도</p>
-        <hr className="hms-rule" />
-        <p className="hms-intent">고객의 경험부터 처리 결과까지,<br />더 나은 방식을 찾습니다.</p>
-        <a className="hms-source" href="https://hansol.com/home/hansol/hansol01.jsp" target="_blank" rel="noreferrer">
-          Hansol Management System <ArrowUpRight size={11} aria-hidden="true" />
-        </a>
+    <section
+      ref={sectionRef}
+      className="hms-principles"
+      aria-labelledby="hms-title"
+    >
+      <header className="hms-principles-heading">
+        <h2 id="hms-title">HMS, 개발의 기준으로</h2>
+        <a href="https://hansol.com/home/hansol/hansol01.jsp" target="_blank" rel="noreferrer">Hansol Management System</a>
+        {!reducedMotion && <button className="hms-autoplay" type="button" aria-label={paused ? 'HMS 조합 자동 전환 재생' : 'HMS 조합 자동 전환 일시정지'} aria-pressed={paused} onClick={() => setPaused((value) => !value)}>{paused ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}</button>}
+      </header>
+      <div className="hms-principles-groups">
+        <fieldset className="hms-principles-group hms-business">
+          <legend>사업원칙</legend>
+          <div className="hms-principles-options">
+            {approaches.map((item, index) => <button key={item.business} type="button" aria-pressed={selected === index} onClick={() => setSelected(index)}><span className="hms-principle-label">{item.business}</span></button>)}
+          </div>
+        </fieldset>
+        <fieldset className="hms-principles-group hms-organization">
+          <legend>조직원칙</legend>
+          <div className="hms-principles-options">
+            {approaches.map((item, index) => <button key={item.organization} type="button" aria-pressed={selected === index} onClick={() => setSelected(index)}><span className="hms-principle-label">{item.organization}</span></button>)}
+          </div>
+        </fieldset>
+      </div>
+      <div className="hms-approach" aria-label="유다현의 개발 방식">
+        <p key={selected}>{approaches[selected].message}</p>
       </div>
     </section>
   );
