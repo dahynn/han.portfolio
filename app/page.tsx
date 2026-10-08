@@ -74,7 +74,7 @@ const skillLevelLabels = ['기초', '초급', '중급', '고급', '전문가'];
 function BrandLogo() {
   return (
     <span className="hansol-logo" aria-label="한솔PNS IT">
-      <img src="/assets/hansol-pns-logo.png" alt="" aria-hidden="true" /><span className="brand-division">IT</span>
+      <img src="/assets/hansol-pns-logo.png" alt="" aria-hidden="true" /><img className="brand-colors" src="/assets/hansol-pns-logo.png" alt="" aria-hidden="true" />
     </span>
   );
 }
@@ -97,7 +97,7 @@ export default function Home() {
         <div className="profile-intro">
           <div className="photo-slot"><img src="/assets/profile.png" alt="유다현 프로필 사진" fetchPriority="high" decoding="async" /></div>
           <p className="profile-name">유다현</p>
-          <p className="profile-role">백엔드 개발자</p>
+          <p className="profile-role">풀스택 개발자</p>
           <section className="profile-contact" aria-labelledby="profile-contact-title">
             <h2 id="profile-contact-title">Contact</h2>
             <dl>

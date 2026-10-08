@@ -6,6 +6,8 @@ const outputDirectory = resolve('dist/client');
 const html = await readFile(resolve(outputDirectory, 'index.html'), 'utf8');
 
 assert.match(html, /한솔PNS IT/, 'The exported page must use Hansol PNS IT branding.');
+assert.match(html, /풀스택 개발자/, 'The exported page must use the full-stack role.');
+for (const principle of ['몰입', '투명', '존중', '스피드']) assert.ok(html.includes(principle), `Missing Hansol principle: ${principle}`);
 assert.doesNotMatch(html, /한화생명|한화 금융에서|hanwha-symbol|Hanwha Display/, 'Old target branding must be removed.');
 assert.equal((await readFile(resolve(outputDirectory, 'CNAME'), 'utf8')).trim(), 'hansol.dahyeon.kr');
 assert.match(html, /유다현 포트폴리오/, 'The exported page must have its portfolio title.');
