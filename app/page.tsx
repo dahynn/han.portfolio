@@ -1,6 +1,6 @@
 /* oxlint-disable next/no-img-element -- 원본 GIF 애니메이션과 고정 비율 포트폴리오 자산을 그대로 표시합니다. */
 import { PageSnap } from '../components/PageSnap';
-import { ArrowDown, CheckCircle2, Mail, UserRound, UsersRound } from 'lucide-react';
+import { ArrowDown, CheckCircle2, Mail, MousePointer2, UserRound, UsersRound } from 'lucide-react';
 import { ProjectCaseStudies } from '../components/ProjectCaseStudies';
 import { PersonalStrengths } from '../components/PersonalStrengths';
 import { SkillCriteria } from '../components/SkillCriteria';
@@ -107,7 +107,11 @@ export default function Home() {
           </section>
         </div>
         <div className="profile-details">
-          <h1 id="portfolio-title"><span className="cover-title-prefix">고객의</span><span className="cover-title-top"><em>서비스 여정</em>을</span><span className="cover-title-follow"><span className="cover-title-highlight"><em>끝까지</em> 따라가는</span> <em>개발자</em></span></h1>
+          <h1 id="portfolio-title" className="cover-fullstack-title">
+            <span className="cover-message-line">고객의 <span className="cover-click-word">클릭<MousePointer2 aria-hidden="true" /></span> 한 번부터</span>{' '}
+            <span className="cover-message-line cover-message-data">데이터의 <em>마지막 줄</em>까지,</span>{' '}
+            <span className="cover-message-line cover-message-conclusion"><span className="cover-title-highlight"><em>끝까지 따라가는</em></span>{' '}<span className="cover-message-role">풀스택 개발자</span></span>
+          </h1>
           <PersonalStrengths />
         </div>
         <BrandLogo />

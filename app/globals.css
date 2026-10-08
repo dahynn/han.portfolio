@@ -2079,3 +2079,73 @@ a { color:inherit; text-decoration:none; }
 
 /* Keep section numbers below the compact wordmark. */
 .page-number { top:76px; }
+
+/* Preserve the CJ cover's staggered three-line composition in Hansol colors. */
+@font-face { font-family:'Hansol Website Noto Sans KR'; src:url('/assets/fonts/NotoSansKR-Regular.woff2') format('woff2'); font-style:normal; font-weight:400; font-display:swap; }
+@font-face { font-family:'Hansol Website Noto Sans KR'; src:url('/assets/fonts/NotoSansKR-Black.woff2') format('woff2'); font-style:normal; font-weight:900; font-display:swap; }
+#introduction .profile-details>h1.cover-fullstack-title {
+  display:block;
+  margin:0;
+  font-size:clamp(1.65rem,2.85vw,3.05rem);
+  font-family:'Hansol Website Noto Sans KR',Pretendard,sans-serif;
+  font-weight:900;
+  line-height:1.32;
+  letter-spacing:-.055em;
+  word-break:keep-all;
+}
+#introduction .cover-fullstack-title .cover-message-line { display:block; }
+#introduction .cover-fullstack-title .cover-message-data { padding-right:clamp(.75rem,2vw,2rem); text-align:right; }
+#introduction .cover-fullstack-title .cover-message-conclusion { padding-left:clamp(0rem,1.5vw,1rem); }
+#introduction .cover-fullstack-title em { font-style:normal; color:var(--hansol-blue); }
+#introduction .cover-fullstack-title .cover-message-role { color:#fff; white-space:nowrap; }
+#introduction .cover-fullstack-title .cover-title-highlight em { color:#fff; }
+#introduction .cover-fullstack-title .cover-title-highlight::after {
+  bottom:-.03em;
+  height:.45em;
+  background:var(--hansol-green);
+  -webkit-mask:url('/assets/hero-brush-marker.webp') center / 100% 100% no-repeat;
+  mask:url('/assets/hero-brush-marker.webp') center / 100% 100% no-repeat;
+  clip-path:inset(0 0 0 0);
+  animation:none;
+}
+#introduction .hansol-principles { font-family:'Hansol Website Noto Sans KR',Pretendard,sans-serif; }
+#introduction .principles-experience dd { font-weight:400; }
+.principles-wheel figcaption span { font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-weight:300; }
+#introduction .cover-click-word {
+  position:relative;
+  display:inline-block;
+  color:var(--hansol-blue);
+  transform-origin:50% 70%;
+}
+#introduction.cover-page.is-active .cover-click-word { animation:cover-click-pulse 5s ease-in-out .8s infinite; }
+#introduction .cover-click-word svg {
+  position:absolute;
+  top:.55em;
+  right:-.03em;
+  width:.42em;
+  height:.42em;
+  color:#fff;
+  fill:#19242c;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.55));
+  transform:translate(.15em,.2em) scale(1.12);
+  pointer-events:none;
+}
+#introduction.cover-page.is-active .cover-click-word svg { animation:cover-cursor-click 5s ease-in-out .8s infinite; }
+@keyframes cover-click-pulse {
+  0%,8%,17%,100% { transform:scale(1); }
+  11% { transform:scale(1.085); }
+  14% { transform:scale(.985); }
+}
+@keyframes cover-cursor-click {
+  0%,5%,18%,100% { transform:translate(.15em,.2em) scale(1.12); }
+  9% { transform:translate(-.12em,-.12em) scale(.92); }
+  12% { transform:translate(-.12em,-.12em) scale(.76); }
+  16% { transform:translate(.15em,.2em) scale(1.12); }
+}
+@media(max-width:760px) {
+  #introduction .profile-details>h1.cover-fullstack-title { font-size:clamp(1.4rem,5.5vw,2.15rem); }
+}
+@media(prefers-reduced-motion:reduce) {
+  #introduction.cover-page.is-active .cover-click-word,
+  #introduction.cover-page.is-active .cover-click-word svg { animation:none; }
+}
